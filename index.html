@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Family</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #FCE4EC; /* 浅粉色背景 */
+            color: #880E4F; /* 文字颜色 */
+        }
+        .banner {
+            opacity: 0; /* 初始设为透明 */
+            font-size: 36px; /* 增大字号 */
+            font-weight: bold; /* 字体加粗 */
+            margin-top: 50px; /* 增加顶部间距 */
+            transition: opacity 2s ease-in-out; /* 添加渐变效果 */
+        }
+        #startButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #880E4F;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #footer {
+            margin-top: 100px;
+            font-size: 12px;
+        }
+        /* 更多美化样式 */
+    </style>
+</head>
+<body>
+    <div id="confetti-wrapper"></div>
+    <div class="banner" id="birthdayMessage">今天是 母亲节<br>今天是 你 的节日<br>走过42年，筚路蓝缕，栉风沐雨<br>走过42年，跨越山海，终见曙光<br>走过42年，风雨兼程，开创奋进<br>走过42年，不念过往，不畏将来<br>感恩有你，感谢有你<br>尽管会有矛盾，会有分歧<br>也是莽莽撞撞过来的啊<br>不变的是永恒的亲情<br>感谢您赐予我生命<br>感谢您加以我教导<br>感谢一路有你<r></r>祝身体健康，万事如意，家和万事兴！</div>
+    <button id="startButton">开始</button>
+    <div id="footer">© HushedAlways <span id="year"></span> 母亲节快乐！</div>
 
+    <audio id="birthdaySong" src="https://www.ihaoge.net/server/1/237149860.mp3"></audio> <!-- 示例链接，请替换为有效的音乐文件链接 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@canvas-confetti@1.4.0/dist/canvas-confetti.min.js"></script>
+    <script>
+        window.onload = function() {
+            document.getElementById('year').innerText = new Date().getFullYear();
+
+            var startButton = document.getElementById('startButton');
+            startButton.onclick = function() {
+                var end = Date.now() + (15 * 1000); // 持续时间设置为15秒
+
+                // 创建一个持续的彩带效果
+                var interval = setInterval(function() {
+                    if (Date.now() > end) {
+                        clearInterval(interval);
+                    }
+
+                    // 每次调用生成随机位置的彩带
+                    canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
+                        particleCount: 7,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9']
+                    });
+                    canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
+                        particleCount: 7,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9']
+                    });
+                }, 250);
+
+                // 渐变显示祝福语
+                var birthdayMessage = document.getElementById('birthdayMessage');
+                birthdayMessage.style.opacity = 1;
+
+            };
+        };
+    </script>
+</body>
+</html>
